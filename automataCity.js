@@ -1,18 +1,35 @@
-let car;
+let cars = [];
+const numOfCars = 100;
+var w = 600;
+var h = 600;
 function setup() {
-    var w = 600;
-    var h = 600;
     createCanvas(w, h);
-    car = new Vehicle(w/2, h/2);
+    for (var i = 0; i < numOfCars; i++){
+      cars[i] = new Vehicle(width, height);
+    }
   }
+  function draw() {
+    background(0);
+    let mousePos = createVector(mouseX, mouseY);
+    for (var i = 0; i < cars.length; i++){
+      cars[i].seek(mousePos);
+      cars[i].update();
+      cars[i].show();
+    }
+    
+  }
+
+  /*
+  Class declarations
+  */
   class Vehicle {
-    constructor(x, y) {
-      this.position = createVector(x, y);
+    constructor(width, height) {
+      this.position = createVector(random(0, width), random(0, height));
       this.velocity = createVector(0, 0);
       this.acceleration = createVector(0, 0);
       this.r = 6.0;
       this.maxforce = 8;
-      this.maxspeed = 5;
+      this.maxspeed = random(5, 10);
     }
   
     update() {
@@ -45,12 +62,4 @@ function setup() {
       endShape(CLOSE);
       pop();
     }
-  }
-  
-  function draw() {
-    background(0);
-    let mousePos = createVector(mouseX, mouseY);
-    car.seek(mousePos);
-    car.update();
-    car.show();
   }
