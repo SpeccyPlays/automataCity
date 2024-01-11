@@ -1,8 +1,8 @@
 let vehicles = [];
 const numOfCars = 10;
 let debug = true;
-var w = 600;
-var h = 600;
+var w = innerWidth - 20;
+var h = innerHeight - 20;
 
 function setup() {
     createCanvas(w, h);
