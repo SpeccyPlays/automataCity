@@ -11,9 +11,11 @@
 
 // The "Vehicle" class
     constructor(x, y) {
+      let xx = random(0, x);
+      let yy = random(0, y);
       this.acceleration = createVector(0, 0);
       this.velocity = createVector(0, 0);
-      this.position = createVector(x, y);
+      this.position = createVector(xx, yy);
       this.r = 6;
       this.wandertheta = 0.0;
       this.maxspeed = 2;
@@ -36,7 +38,40 @@
       // Reset accelerationelertion to 0 each cycle
       this.acceleration.mult(0);
     }
-
+    seperate(vehicles) {
+      let desiredSeparation = this.r * 6;
+      //The desired separation is based on the vehicle’s size.
+      let sum = createVector();
+      let count = 0;
+      let wanderD = 25;  
+      let circlePos = this.velocity.copy();
+      circlePos.normalize();
+      circlePos.mult(wanderD);
+      circlePos.add(this.position);
+      if (debug) this.drawSeperationStuff(circlePos);
+      //if (debug) this.drawSeperationStuff();
+      for (let other of vehicles) {
+        let crash = p5.Vector.dist(circlePos, other.position);
+        let d = p5.Vector.dist(this.position, other.position);
+        if (this !== other && crash < desiredSeparation/2){
+          this.slowDown(0.25);
+        }
+        else if (this !== other && d < desiredSeparation) {
+          let diff = p5.Vector.sub(this.position, other.position);
+          diff.setMag(1 / d);
+      //What is the magnitude of the p5.Vector pointing away from the other vehicle? The closer it is, the more the vehicle should flee. The farther, the less. So the magnitude is set to be inversely proportional to the distance.
+  
+          sum.add(diff);
+          count++;
+        }
+      }
+      if (count > 0) {
+        sum.setMag(this.maxspeed);
+        let steer = p5.Vector.sub(sum, this.velocity);
+        steer.limit(this.maxforce / 2);
+        this.applyForce(steer);
+      }
+    }
     wander() {
       let wanderR = 2;
       let wanderD = 50;
@@ -65,7 +100,9 @@
       // We could add mass here if we want A = F / M
       this.acceleration.add(force);
     }
-
+    slowDown(reduction){
+      this.velocity.mult(reduction);
+    }
     // A method that calculates and applies a steering force towards a target
     // STEER = DESIRED MINUS VELOCITY
     seek(target) {
@@ -116,18 +153,24 @@
       line(location.x, location.y, circlePos.x, circlePos.y);
       line(circlePos.x, circlePos.y, target.x, target.y);
     }
+    drawSeperationStuff(circlePos){
+      stroke(0);
+      noFill();
+      strokeWeight(1);
+      circle(circlePos.x, circlePos.y, this.r * 6);
+    }
   }//end vehicle class
   class Car extends Vehicle {
-    constructor(){
-      super();
+    constructor(x, y){
+      super(x,y );
       this.maxspeed = 5;
       this.maxforce = 0.09;
       this.r = 3;
     }
   }//end Car class
   class Truck extends Vehicle {
-    constructor(){
-      super();
+    constructor(x, y){
+      super(x, y);
       this.maxspeed = 2;
       this.maxforce = 0.02;
       this.r = 6;
