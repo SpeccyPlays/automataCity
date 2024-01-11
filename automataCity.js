@@ -1,5 +1,6 @@
 let vehicles = [];
-const numOfCars = 50;
+const numOfCars = 10;
+let debug = true;
 var w = 600;
 var h = 600;
 
@@ -16,14 +17,14 @@ function setup() {
     }
   }
   function draw() {
-    background(0);
-    let mousePos = createVector(mouseX, mouseY);
+    background(255);
     for (var i = 0; i < vehicles.length; i++){
-      vehicles[i].seek(mousePos);
-      vehicles[i].update();
-      vehicles[i].show();
+      vehicles[i].wander();
+      vehicles[i].run();
     }
-    
+  }
+  function mousePressed() {
+      debug = !debug;
   }
 
   
