@@ -49,18 +49,13 @@
       circlePos.mult(wanderD);
       circlePos.add(this.position);
       if (debug) this.drawSeperationStuff(circlePos);
-      //if (debug) this.drawSeperationStuff();
       for (let other of vehicles) {
         let crash = p5.Vector.dist(circlePos, other.position);
         let d = p5.Vector.dist(this.position, other.position);
         if (this !== other && crash < desiredSeparation){
-          this.slowDown(0.85);
-        }
-        else if (this !== other && d < desiredSeparation) {
+          this.slowDown(0.90);
           let diff = p5.Vector.sub(this.position, other.position);
           diff.setMag(1 / d);
-      //What is the magnitude of the p5.Vector pointing away from the other vehicle? The closer it is, the more the vehicle should flee. The farther, the less. So the magnitude is set to be inversely proportional to the distance.
-  
           sum.add(diff);
           count++;
         }
