@@ -43,7 +43,7 @@
       //The desired separation is based on the vehicle’s size.
       let sum = createVector();
       let count = 0;
-      let wanderD = 25;  
+      let wanderD = this.maxspeed * abs(this.velocity.x * this.velocity.y);
       let circlePos = this.velocity.copy();
       circlePos.normalize();
       circlePos.mult(wanderD);
@@ -53,8 +53,8 @@
       for (let other of vehicles) {
         let crash = p5.Vector.dist(circlePos, other.position);
         let d = p5.Vector.dist(this.position, other.position);
-        if (this !== other && crash < desiredSeparation/2){
-          this.slowDown(0.25);
+        if (this !== other && crash < desiredSeparation){
+          this.slowDown(0.85);
         }
         else if (this !== other && d < desiredSeparation) {
           let diff = p5.Vector.sub(this.position, other.position);
@@ -73,9 +73,9 @@
       }
     }
     wander() {
-      let wanderR = 2;
-      let wanderD = 50;
-      let change = 0.5;
+      let wanderR = 1;
+      let wanderD = 100;
+      let change = 0.1;
       this.wandertheta += random(-change, change);
 
       let circlePos = this.velocity.copy();
