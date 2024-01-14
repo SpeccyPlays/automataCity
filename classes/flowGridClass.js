@@ -8,7 +8,7 @@ class FlowGrid {
         this.grid = [this.rows[this.cols]];
         for (let x = 0; x < this.rows; x++){
             for (let y = 0; y < this.cols; y++){
-                this.grid[x[y]] = p5.Vector.random2D();
+                this.grid[x[y]] = createVector(1, 1);
             }
         }
     } //end constructor

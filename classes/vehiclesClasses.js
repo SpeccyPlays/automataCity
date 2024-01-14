@@ -168,7 +168,7 @@
   class Car extends Vehicle {
     constructor(x, y){
       super(x,y );
-      this.maxspeed = 5;
+      this.maxspeed = random(4, 6);
       this.maxforce = 0.09;
       this.r = 3;
       this.stoppingAmount = 0.80;
@@ -177,7 +177,7 @@
   class Truck extends Vehicle {
     constructor(x, y){
       super(x, y);
-      this.maxspeed = 3;
+      this.maxspeed = random(2, 4);
       this.maxforce = 0.02;
       this.r = 5;
       this.stoppingAmount = 0.90;
