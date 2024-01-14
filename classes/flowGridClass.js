@@ -6,9 +6,11 @@ class FlowGrid {
         this.cols = height / cellSize;
         this.rows = width / cellSize;
         this.grid = [this.rows[this.cols]];
+        noiseSeed(random(10000));
+        let xoff = 0;
         for (let x = 0; x < this.rows; x++){
             for (let y = 0; y < this.cols; y++){
-                this.grid[x[y]] = createVector(1, 1);
+                this.grid[x[y]] = createVector(-1, 1);
             }
         }
     } //end constructor
