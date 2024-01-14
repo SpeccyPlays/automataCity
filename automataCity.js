@@ -1,5 +1,5 @@
 let vehicles = [];
-const numOfCars = 50;
+const numOfCars = 1;
 let debug = true;
 var w = innerWidth * 0.85;
 var h = innerHeight * 0.85;
