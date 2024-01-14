@@ -64,9 +64,18 @@
       if (count > 0) {
         sum.setMag(this.maxspeed);
         let steer = p5.Vector.sub(sum, this.velocity);
-        steer.limit(this.maxforce / 4);
+        steer.limit(this.maxforce / 2);
         this.applyForce(steer);
       }
+    }
+    follow(flow) {
+      let desired = flow.lookup(this.position);
+      desired.setMag(this.maxspeed);
+      //What is the vector at that spot in the flow field?
+      let steer = p5.Vector.sub(desired, this.velocity);
+      steer.limit(this.maxforce);
+      this.applyForce(steer);
+      //Steering is desired minus velocity.
     }
     wander() {
       let wanderR = 1;
