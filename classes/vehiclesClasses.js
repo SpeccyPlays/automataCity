@@ -20,6 +20,7 @@
       this.wandertheta = 0.0;
       this.maxspeed = 2;
       this.maxforce = 0.05;
+      this.stoppingAmount = 0.00;
     }
 
     run() {
@@ -53,7 +54,7 @@
         let crash = p5.Vector.dist(circlePos, other.position);
         let d = p5.Vector.dist(this.position, other.position);
         if (this !== other && crash < desiredSeparation){
-          this.slowDown(0.90);
+          this.slowDown(this.stoppingAmount);
           let diff = p5.Vector.sub(this.position, other.position);
           diff.setMag(1 / d);
           sum.add(diff);
@@ -63,14 +64,14 @@
       if (count > 0) {
         sum.setMag(this.maxspeed);
         let steer = p5.Vector.sub(sum, this.velocity);
-        steer.limit(this.maxforce / 2);
+        steer.limit(this.maxforce / 4);
         this.applyForce(steer);
       }
     }
     wander() {
       let wanderR = 1;
       let wanderD = 100;
-      let change = 0.1;
+      let change = 0.05;
       this.wandertheta += random(-change, change);
 
       let circlePos = this.velocity.copy();
@@ -161,13 +162,15 @@
       this.maxspeed = 5;
       this.maxforce = 0.09;
       this.r = 3;
+      this.stoppingAmount = 0.80;
     }
   }//end Car class
   class Truck extends Vehicle {
     constructor(x, y){
       super(x, y);
-      this.maxspeed = 2;
+      this.maxspeed = 3;
       this.maxforce = 0.02;
-      this.r = 6;
+      this.r = 5;
+      this.stoppingAmount = 0.90;
     }
   } //end Truck class
