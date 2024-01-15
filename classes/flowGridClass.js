@@ -8,13 +8,11 @@ class FlowGrid {
         for (let x = 0; x < this.cols; x++){
             this.grid[x] = [];
             for (let y = 0; y < this.rows; y++){
-                this.grid[x][y] = createVector(1, 1);
+                this.grid[x][y] = p5.Vector.random2D();
             }
         }
     } //end constructor
     lookup(position){
-        //let col = floor(position.x / this.cellSize);
-        //let row = floor(position.y / this.cellSize);
         let col = floor(position.x / this.cellSize);
         let row = floor(position.y / this.cellSize);
         return this.grid[col][row].copy();

@@ -142,10 +142,11 @@
 
     // Wraparound
     borders() {
-      if (this.position.x < -this.r) this.position.x = width + this.r;
-      if (this.position.y < -this.r) this.position.y = height + this.r;
-      if (this.position.x > width - this.r) this.position.x = +this.r;
-      if (this.position.y > height - this.r) this.position.y = +this.r;
+      let boundary = 10;
+      if (this.position.x < boundary) this.position.x = width - boundary - this.r;
+      if (this.position.y < boundary) this.position.y = height - boundary - this.r;
+      if (this.position.x > width - boundary) this.position.x = + this.r + boundary;
+      if (this.position.y > height - boundary) this.position.y = + this.r + boundary;
     }
 
     // A method just to draw the circle associated with wandering
