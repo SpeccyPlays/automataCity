@@ -30,8 +30,10 @@ function setup() {
     menu.update();
     grid.draw();
   }
-  /*function mousePressed() {
-      debug = !debug;
-  }*/
+  function mousePressed() {
+    let mousePos = createVector(mouseX, mouseY);
+    let angle = 0.785398;
+    grid.updateCell(mousePos, angle);
+  }
 
   

@@ -36,4 +36,12 @@ class FlowGrid {
             }
         }
     }//end draw
+    updateCell(position, angleInRads){
+        let col = floor(position.x / this.cellSize);
+        let row = floor(position.y / this.cellSize);
+        if ((col >= 0 && col < this.cols) && (row >= 0 && row < this.rows)){
+            this.grid[col][row] = p5.Vector.fromAngle(angleInRads);
+        }
+
+    }//end update cell
 }
