@@ -1,5 +1,7 @@
 class FlowGrid {
     constructor(width, height, cellSize){
+        this.width = width;
+        this.height =height;
         this.cellSize = cellSize;
         this.cols = ceil(width/ cellSize);
         this.rows = ceil(height / cellSize);
@@ -33,6 +35,12 @@ class FlowGrid {
                   let y = j * h + h / 2;
                   line(x, y, x + v.x, y + v.y);
                 }
+            }
+            for (let col = 0; col < this.width; col += this.cellSize){
+                line(col, 0, col, this.height);
+            }
+            for (let row = 0; row < this.height; row += this.cellSize){
+                line(0, row, this.width, row)
             }
         }
     }//end draw
