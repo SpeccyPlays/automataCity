@@ -1,5 +1,5 @@
 let vehicles = [];
-const numOfCars = 10;
+const numOfCars = 20;
 let debug = true;
 var w = innerWidth * 0.85;
 var h = innerHeight * 0.85;
@@ -10,12 +10,15 @@ function setup() {
     createCanvas(w, h);
     menu = new UiMenu(w);
     grid = new FlowGrid(w, h, 32);
+
     for (var i = 0; i < numOfCars; i++){
+      let hh = random(0, h);
+      let ww = random(0, w);
       if (i % 2 == 0){
-        vehicles.push(new Truck(0, height));
+        vehicles.push(new Truck(ww, hh));
       }
       else {
-        vehicles.push(new Car(0, height));
+        vehicles.push(new Car(ww, hh));
       }  
     }
   }
@@ -32,13 +35,11 @@ function setup() {
   }
   function mousePressed() {
     let mousePos = createVector(mouseX, mouseY);
-    let angle = 0;
-    grid.updateCell(mousePos, angle);
+    grid.updateCell(mousePos, menu.flowAngle);
   }
   function mouseDragged(){
     let mousePos = createVector(mouseX, mouseY);
-    let angle = 0;
-    grid.updateCell(mousePos, angle);
+    grid.updateCell(mousePos, menu.flowAngle);
   }
 
   

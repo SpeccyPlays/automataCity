@@ -44,7 +44,7 @@
       //The desired separation is based on the vehicle’s size.
       let sum = createVector();
       let count = 0;
-      let wanderD = this.maxspeed * abs((this.velocity.x + 1)* (this.velocity.y + 1));
+      let wanderD = this.maxspeed * abs((this.velocity.x + 1) * (this.velocity.y + 1));
       let circlePos = this.velocity.copy();
       circlePos.normalize();
       circlePos.mult(wanderD);
