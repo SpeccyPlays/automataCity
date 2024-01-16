@@ -40,15 +40,11 @@
       this.acceleration.mult(0);
     }
     seperate(vehicles) {
-      let desiredSeparation = this.r * 8;
+      let desiredSeparation = this.r * 6;
       //The desired separation is based on the vehicle’s size.
       let sum = createVector();
       let count = 0;
-      let wanderD = this.maxspeed * abs((this.velocity.x + 1) * (this.velocity.y + 1));
-      let circlePos = this.velocity.copy();
-      circlePos.normalize();
-      circlePos.mult(wanderD);
-      circlePos.add(this.position);
+      let circlePos = this.futurePosition();
       if (debug) this.drawSeperationStuff(circlePos);
       for (let other of vehicles) {
         let crash = p5.Vector.dist(circlePos, other.position);
@@ -100,7 +96,16 @@
       //Render wandering circle, etc.
       if (debug) this.drawWanderStuff(this.position, circlePos, target, wanderR);
     }
-
+    futurePosition(){
+      let velocityMagnitude = dist(0, 0, this.velocity.x, this.velocity.y);
+      // Increase wanderD based on the velocity magnitude
+      let wanderD = this.maxspeed * (1 + velocityMagnitude) * this.r;
+      let futurePos = this.velocity.copy();
+      futurePos.normalize();
+      futurePos.mult(wanderD);
+      futurePos.add(this.position);
+      return futurePos;
+    }
     applyForce(force) {
       // We could add mass here if we want A = F / M
       this.acceleration.add(force);
