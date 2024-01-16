@@ -8,7 +8,7 @@ class FlowGrid {
         for (let x = 0; x < this.cols; x++){
             this.grid[x] = [];
             for (let y = 0; y < this.rows; y++){
-                this.grid[x][y] = p5.Vector.random2D();
+                this.grid[x][y] = p5.Vector.fromAngle(1.5708);
             }
         }
     } //end constructor

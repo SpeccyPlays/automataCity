@@ -40,11 +40,11 @@
       this.acceleration.mult(0);
     }
     seperate(vehicles) {
-      let desiredSeparation = this.r * 6;
+      let desiredSeparation = this.r * 8;
       //The desired separation is based on the vehicle’s size.
       let sum = createVector();
       let count = 0;
-      let wanderD = this.maxspeed * abs(this.velocity.x * this.velocity.y);
+      let wanderD = this.maxspeed * abs((this.velocity.x + 1)* (this.velocity.y + 1));
       let circlePos = this.velocity.copy();
       circlePos.normalize();
       circlePos.mult(wanderD);
@@ -169,7 +169,7 @@
   class Car extends Vehicle {
     constructor(x, y){
       super(x,y );
-      this.maxspeed = random(4, 6);
+      this.maxspeed = random(3, 4);
       this.maxforce = 0.09;
       this.r = 3;
       this.stoppingAmount = 0.80;
@@ -178,7 +178,7 @@
   class Truck extends Vehicle {
     constructor(x, y){
       super(x, y);
-      this.maxspeed = random(2, 4);
+      this.maxspeed = random(1, 3);
       this.maxforce = 0.02;
       this.r = 5;
       this.stoppingAmount = 0.90;

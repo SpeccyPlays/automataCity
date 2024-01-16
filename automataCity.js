@@ -32,7 +32,12 @@ function setup() {
   }
   function mousePressed() {
     let mousePos = createVector(mouseX, mouseY);
-    let angle = 0.785398;
+    let angle = 0;
+    grid.updateCell(mousePos, angle);
+  }
+  function mouseDragged(){
+    let mousePos = createVector(mouseX, mouseY);
+    let angle = 0;
     grid.updateCell(mousePos, angle);
   }
 
