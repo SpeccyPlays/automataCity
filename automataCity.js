@@ -17,7 +17,7 @@ function setup() {
       let hh = random(0, h);
       let ww = random(0, w);
       if (i % 2 == 0){
-        vehicles.push(new Car(ww, hh));
+        vehicles.push(new Truck(ww, hh));
       }
       else {
         vehicles.push(new Car(ww, hh));
