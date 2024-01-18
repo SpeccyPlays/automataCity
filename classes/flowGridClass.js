@@ -13,6 +13,7 @@ class FlowGrid {
                 this.grid[x][y] = p5.Vector.fromAngle(0);
             }
         }
+        this.arrow = loadImage('./images/arrow.png');
     } //end constructor
     lookup(position){
         let col = floor(position.x / this.cellSize);
@@ -27,13 +28,12 @@ class FlowGrid {
             //draw the flow direction
             for (let i = 0; i < this.cols; i++) {
                 for (let j = 0; j < this.rows; j++) {
-                  let w = width / this.cols;
-                  let h = height / this.rows;
-                  let v = this.grid[i][j].copy();
-                  v.setMag(w * 0.5);
-                  let x = i * w + w / 2;
-                  let y = j * h + h / 2;
-                  line(x, y, x + v.x, y + v.y);
+                    push(); // Save the current transformation state
+                    translate(i * this.cellSize + this.cellSize / 2, j * this.cellSize + this.cellSize / 2);
+                    rotate(this.grid[i][j].heading() + 1.5708);
+                    imageMode(CENTER);
+                    image(this.arrow, 0, 0);
+                    pop(); // Restore the previous transformation state
                 }
             }
             for (let col = 0; col < this.width; col += this.cellSize){
@@ -49,6 +49,12 @@ class FlowGrid {
         let row = floor(position.y / this.cellSize);
         if ((col >= 0 && col < this.cols) && (row >= 0 && row < this.rows)){
             this.grid[col][row] = p5.Vector.fromAngle(angleInRads);
+            push(); // Save the current transformation state
+            translate(col * this.cellSize + this.cellSize / 2, row * this.cellSize + this.cellSize / 2);
+            rotate(this.grid[col][row].heading() + 1.5708);
+            imageMode(CENTER);
+            image(this.arrow, 0, 0);
+            pop(); // Restore the previous transformation state
         }
 
     }//end update cell

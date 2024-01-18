@@ -97,9 +97,10 @@
       if (debug) this.drawWanderStuff(this.position, circlePos, target, wanderR);
     }
     futurePosition(){
+      //returns a position in advance of the vehicle based on it's current speed
       let velocityMagnitude = dist(0, 0, this.velocity.x, this.velocity.y);
       // Increase wanderD based on the velocity magnitude
-      let wanderD = this.maxspeed * (1 + velocityMagnitude) * this.r;
+      let wanderD = this.maxspeed * (1 + velocityMagnitude) + this.r;
       let futurePos = this.velocity.copy();
       futurePos.normalize();
       futurePos.mult(wanderD);

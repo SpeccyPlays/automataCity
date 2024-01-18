@@ -10,7 +10,7 @@ class UiMenu {
         this.sliderLabel.position(this.width, gap);
         gap += menuItemGap;
 
-        this.angleSlider = createSlider(0, 315, 180, 45);
+        this.angleSlider = createSlider(0, 315, 0, 45);
         this.angleSlider.position(this.width, gap)
         this.flowAngle = this.angleSlider.value() * PI /180;
         gap += menuItemGap;
