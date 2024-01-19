@@ -8,7 +8,7 @@ let grid;
 //let arrow;
 
 function setup() {
-    createCanvas(w, h);
+    createCanvas(innerWidth - 20, innerHeight - 20);
     menu = new UiMenu(w, 20);
     grid = new FlowGrid(w, h, 32);
     for (var i = 0; i < numOfCars; i++){

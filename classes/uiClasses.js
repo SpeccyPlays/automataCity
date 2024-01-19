@@ -3,7 +3,7 @@ class UiMenu {
         this.menuItemGap = 30;
         let gap = this.menuItemGap;
         this.width = width + 50;
-        this.arrow = createImg('./images/arrow.png', 'flowAngle');
+        this.arrow = loadImage('./images/arrow.png', 'flowAngle');
         gap += this.menuItemGap;
         this.angleSlider = createSlider(0, 315, 0, 45);
         this.angleSlider.position(this.width, startHeight + gap)
@@ -14,7 +14,6 @@ class UiMenu {
     }
     update(){
         this.flowAngle = this.angleSlider.value() * PI /180;
-        this.arrow.position(this.width, this.menuItemGap);
         push(); // Save the current transformation state
         translate(this.width, this.menuItemGap + 25);
         rotate(this.flowAngle + 1.5708); //this adds 90 so image is correctly rotated according to the slider
