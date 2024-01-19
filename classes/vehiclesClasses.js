@@ -8,6 +8,8 @@
 // The Nature of Code
 // Daniel Shiffman
 // http://natureofcode.com
+//
+// worked on and extended by SpeccyPlays
 
 // The "Vehicle" class
     constructor(x, y) {

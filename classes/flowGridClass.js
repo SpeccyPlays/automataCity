@@ -1,4 +1,8 @@
 class FlowGrid {
+    //due to the way the x/y axis are orientated, a class variable is required to make sure images
+    //are turned to match
+    static imgRotateAngle = 1.5708; //90 degrees in radians
+
     constructor(width, height, cellSize){
         this.width = width;
         this.height =height;
@@ -30,7 +34,7 @@ class FlowGrid {
                 for (let j = 0; j < this.rows; j++) {
                     push(); // Save the current transformation state
                     translate(i * this.cellSize + this.cellSize / 2, j * this.cellSize + this.cellSize / 2);
-                    rotate(this.grid[i][j].heading() + 1.5708);
+                    rotate(this.grid[i][j].heading() + FlowGrid.imgRotateAngle);
                     imageMode(CENTER);
                     image(this.arrow, 0, 0);
                     pop(); // Restore the previous transformation state
@@ -51,7 +55,7 @@ class FlowGrid {
             this.grid[col][row] = p5.Vector.fromAngle(angleInRads);
             push(); // Save the current transformation state
             translate(col * this.cellSize + this.cellSize / 2, row * this.cellSize + this.cellSize / 2);
-            rotate(this.grid[col][row].heading() + 1.5708);
+            rotate(this.grid[col][row].heading() + FlowGrid.imgRotateAngle);
             imageMode(CENTER);
             image(this.arrow, 0, 0);
             pop(); // Restore the previous transformation state

@@ -9,7 +9,7 @@ let grid;
 
 function setup() {
     createCanvas(w, h);
-    menu = new UiMenu(w);
+    menu = new UiMenu(w, 20);
     grid = new FlowGrid(w, h, 32);
     for (var i = 0; i < numOfCars; i++){
       let hh = random(0, h);
@@ -35,12 +35,13 @@ function setup() {
 
   }
   function mousePressed() {
-    let mousePos = createVector(mouseX, mouseY);
-    grid.updateCell(mousePos, menu.flowAngle);
+    cellFlowUpdate();
   }
   function mouseDragged(){
+    cellFlowUpdate();
+  }
+  function cellFlowUpdate(){
     let mousePos = createVector(mouseX, mouseY);
     grid.updateCell(mousePos, menu.flowAngle);
   }
-
   
