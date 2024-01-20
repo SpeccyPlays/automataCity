@@ -44,4 +44,12 @@ function setup() {
     let mousePos = createVector(mouseX, mouseY);
     grid.updateCell(mousePos, menu.flowAngle);
   }
-  
+  function loadAndSave(){
+    try {
+      let jsonGrid = JSON.stringify(grid.grid);
+      saveJSON(jsonGrid, 'flowmap.json');
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
