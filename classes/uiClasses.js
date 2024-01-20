@@ -15,7 +15,7 @@ class UiMenu {
     update(){
         this.flowAngle = this.angleSlider.value() * PI /180;
         push(); // Save the current transformation state
-        translate((width - this.width) / 2 + this.width , this.menuItemGap + 25);
+        translate((width - this.width) / 2 + this.width , this.menuItemGap + 60);
         rotate(this.flowAngle + 1.5708); //this adds 90 so image is correctly rotated according to the slider
         imageMode(CENTER);
         image(this.arrow, 0, 0);
