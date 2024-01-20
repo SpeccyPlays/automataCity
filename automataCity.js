@@ -5,10 +5,10 @@ var w = innerWidth * 0.85;
 var h = innerHeight * 0.85;
 let menu;
 let grid;
-//let arrow;
+let saveButton;
 
 function setup() {
-    createCanvas(innerWidth - 20, innerHeight - 20);
+    createCanvas(innerWidth - 20, innerHeight - 20);//-20 to stop scrollbars
     menu = new UiMenu(w, 20);
     grid = new FlowGrid(w, h, 32);
     for (var i = 0; i < numOfCars; i++){
@@ -21,6 +21,11 @@ function setup() {
         vehicles.push(new Car(ww, hh));
       }  
     }
+    saveButton = createButton('Save flow map');
+    saveButton.position(w + 50,  20);
+    saveButton.mousePressed(() => {
+      saveFlowMap();
+    });
   }
   function draw() {
     background(255);
@@ -44,7 +49,7 @@ function setup() {
     let mousePos = createVector(mouseX, mouseY);
     grid.updateCell(mousePos, menu.flowAngle);
   }
-  function loadAndSave(){
+  function saveFlowMap(){
     try {
       let jsonGrid = JSON.stringify(grid.grid);
       saveJSON(jsonGrid, 'flowmap.json');
