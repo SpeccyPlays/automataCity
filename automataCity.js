@@ -23,8 +23,11 @@ function setup() {
         vehicles.push(new Car(ww, hh));
       }  
     }
-    loadButton = createFileInput(handleFileLoad);
+    loadButton = createButton('Load flow map');
     loadButton.position(w + 50,  20);
+    loadButton.mousePressed(() => {
+      loadFlowMap();
+    });
     saveButton = createButton('Save flow map');
     saveButton.position(w + 50,  50);
     saveButton.mousePressed(() => {
@@ -53,21 +56,19 @@ function setup() {
     let mousePos = createVector(mouseX, mouseY);
     grid.updateCell(mousePos, menu.flowAngle);
   }
-  function handleFileLoad(file){
-    if (file){
-      try {
-        
-        grid.grid = loadJSON(file.data);
-      }
-      catch(e){ 
-        console.log('Error loading file' + e);
-      }
+  function loadFlowMap(){
+    try {
+      let tempGrid = loadJSON('http://127.0.0.1:5500/flowmap.json');
+      console.log(tempGrid);
+    }
+    catch(e){ 
+      console.log('Error loading file' + e);
     }
   }
   function saveFlowMap(){
     try {
       let saveFile = grid.grid;
-      save(saveFile, 'flowmap.txt');
+      saveJSON(saveFile, 'flowmap');
     }
     catch(e){
       console.log('Error saving file' +   e);
